@@ -1,0 +1,539 @@
+@import "responsive-settings";
+@import "variables";
+@import "mixins";
+
+body {
+    font-family: Tahoma, Arial, sans-serif;
+    margin: auto;
+}
+
+html { scroll-behavior: smooth;}
+
+section {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    scroll-margin: $header-height;
+}
+
+.container {
+    display: flex;
+    @include screen-xsm-lg {
+        margin: 70px 50px;
+        width: 100%;
+    }
+    @include screen-xl {
+        margin: 70px auto;
+        width: 1140px;
+    }
+}
+
+.card-container {
+    background-color: $color-white;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 0 $color-lightgray;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.image-container {
+    overflow: hidden;
+    @include screen-xsm {
+        align-self: center;
+        margin: 0;
+        height: 500px;
+        width: 500px;
+    }
+    @include screen-sm {
+        align-self: center;
+        margin: 0;
+        height: 500px;
+        width: 700px;
+    }
+    @include screen-md {
+        height: 100%;
+        position: absolute;
+    }
+    @include screen-lg {
+        height: 100%;
+        position: absolute;
+    }
+    @include screen-xl {
+        height: 100%;
+        position: absolute;
+        width: 60%;
+    }
+    img {
+        position: relative;
+        display: flex;
+        height: 100%;
+    }
+}
+
+.article-container {
+    color: $color-white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    @include screen-xsm-sm {
+        height: fit-content;
+        padding: 40px 50px 0 50px;
+    }
+    @include screen-md-xl {
+        height: fit-content;
+        width: calc(50% - 50px);
+        z-index: 5;
+    }
+    h1 {
+        margin: 0 0 15px 0;
+        @include screen-xsm {
+            font-size: 2rem;
+            line-height: 2rem;
+        }
+        @include screen-sm {
+            font-size: 2.4rem;
+            line-height: 4rem;
+        }
+        @include screen-md {
+            font-size: 2.7rem;
+            line-height: 4rem;
+        }
+        @include screen-lg-xl {
+            font-size: 3rem;
+            line-height: 4rem;
+        }
+    }
+    p {
+        font-size: larger;
+        line-height: 2rem;
+    }
+    a {
+        color: $color-white;
+        text-underline-offset: 4px;
+        &:hover { color: $color-gray; }
+    }
+    button {
+        margin-top: 30px;
+        &:hover {
+            background-color: $color-black;
+            color: $color-white;
+        }
+    }
+}
+
+button {
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 1rem 2rem;
+}
+
+/*------------ HEADER START ------------*/
+#header {
+    background-color: $color-white;
+    position: fixed;
+    height: $header-height;
+    width: 100%;
+    z-index: 10;
+    p {
+        color: $color-lightgray;
+        font-size: xx-large;
+        font-weight: bold;
+        padding-bottom: 6px;
+    }
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    @include screen-xsm-lg { margin: 0 50px; }
+    @include screen-xl {
+        margin: auto;
+        width: 1140px;
+    }
+}
+
+#navbar-button {
+    position: relative;
+    height: 20px;
+    width: 24px;
+    &:hover {
+        cursor: pointer;
+        div { background-color: $color-lightgray; }
+    }
+    div {
+        position: relative;
+        background-color: $color-black;
+        border-radius: 2px;
+        height: 4px;
+        width: 24px;
+    }
+}
+/*------------ HEADER END --------------*/
+/*------------ NAVBAR START ------------*/
+#navbar {
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    background-color: rgba(0, 0, 0, .6);
+    position: fixed;
+    height: 0;
+    width: 100vw;
+    z-index: 20;
+}
+
+@keyframes navbarAppears {
+    from { background-color: rgba(0, 0, 0, .0); height: 0; }
+    5% { background-color: rgba(0, 0, 0, .0); height: 100vh; }
+    to { background-color: rgba(0, 0, 0, .6); height: 100vh; }
+}
+
+@keyframes navbarDisappears {
+    from { background-color: rgba(0, 0, 0, .6); height: 100vh; }
+    95% { background-color: rgba(0, 0, 0, .0); height: 100vh; }
+    to { background-color: rgba(0, 0, 0, .0); height: 0; }
+}
+
+#navbar-panel {
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    background-color: $color-black;
+    color: $color-white;
+    padding: 10px 20px;
+    transform: translateX(-300px);
+    height: 100vh;
+    width: 150px;
+    ul {
+        display: flex;
+        align-items: flex-end;
+        flex-direction: column;
+        list-style-type: none;
+    }
+    li { padding: 0.5rem; }
+    li:first-child a { font-size: xx-large; }
+    a {
+        color: $color-white;
+        font-size: larger;
+        text-decoration: none;
+        &:hover {
+            color: $color-gray;
+            cursor: pointer;
+        }
+    }
+}
+
+@keyframes navbarPanelAppears {
+    from { transform: translateX(-300px); }
+    to { transform: translateX(0px); }
+}
+
+@keyframes navbarPanelDisappears {
+    from { transform: translateX(0px); }
+    to { transform: translateX(-300px); }
+}
+/*------------ NAVBAR END --------------*/
+/*------------ SECTION 1 START ---------*/
+#section-1 {
+    @include section-1-5 ( #e29207, 60px, 160px, -20px, -20px, 10%, 
+    $top-1: $header-height, $top-2: -30px );
+}
+/*------------ SECTION 1 END -----------*/
+/*------------ SECTION 2 START ---------*/
+#section-2 {
+    background-color: #e5e5e5;
+    .container {
+        @include screen-xsm-sm {
+            flex-direction: column;
+            gap: 40px;
+        }
+        @include screen-md-xl { height: 300px; }
+        div {
+            @include screen-md-xl { height: fit-content; }
+        }
+    }
+}
+
+.section-2-1 {
+    flex:1;
+    @include screen-md-xl { align-self: center; }
+    h5 { margin-top: 0; }
+    button {
+        background-color: $color-black;
+        color: $color-white;
+        margin-top: 15px;
+        &:hover { background-color: $color-orange; }
+    }
+}
+
+.section-2-2 {
+    background-color: $color-orange;
+    border-radius: 20px;
+    color: $color-white;
+    padding: 30px 10px;
+    text-align: center;
+    flex: 1;
+    @include screen-md {
+        margin: 0 40px;
+        align-self: flex-end;
+    }
+    @include screen-lg {
+        margin: 0 60px;
+        align-self: flex-end;
+    }
+    @include screen-xl {
+        margin: 0 80px;
+        align-self: flex-end;
+    }
+}
+
+.section-2-3 {
+    background-color: $color-blue;
+    border-radius: 20px;
+    color: $color-white;
+    padding: 30px 10px;
+    text-align: center;
+    flex: 1;
+}
+/*------------ SECTION 2 END -----------*/
+/*------------ SECTION 3 START ---------*/
+#section-3 {
+    @include section-3-7 ( #63a3be, 150px, 50px, -220px, -240px, -140px);
+}
+/*------------ SECTION 3 END -----------*/
+/*------------ SECTION 4 START ---------*/
+#section-4 {
+    background-color: #e5e5e5;
+    .container {
+        gap: 20px;
+        @include screen-xsm-sm { flex-direction: column; }
+        @include screen-md-xl { flex-wrap: wrap; }
+    }
+    .card-container {
+        @include screen-md { flex: 40%; }
+        @include screen-lg-xl { flex: 30%; }
+    }
+    h3 { margin: 0 0 30px 0; }
+    p {
+        color: $color-gray;
+        font-size: smaller;
+        margin: 25px 0;
+    }
+}
+
+.section-4-img-container {
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 30px 30px 0 30px;
+    overflow: hidden;
+    position: relative;
+    height: 260px;
+    width: calc(100% - 60px);
+    img{
+        object-fit: cover;
+        object-position: top;
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 100%;
+    }
+}
+/*------------ SECTION 4 END -----------*/
+/*------------ SECTION 5 START ---------*/
+#section-5 {
+    @include section-1-5 ( #e8aa00, 10px, 110px, -70px, -70px, 5% );
+}
+/*------------ SECTION 5 END -----------*/
+/*------------ SECTION 6 START ---------*/
+#section-6 {
+    background-color: #e5e5e5;
+    .container {
+        gap: 20px;
+        @include screen-xsm-sm { flex-direction: column; }
+        @include screen-md-xl { flex-wrap: wrap; }
+    }
+}
+
+.section-6-1 {
+    background-color: $color-blue;
+    border-radius: 12px;
+    color: $color-white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px;
+    @include screen-md { flex: 30%; }
+    @include screen-lg-xl { flex: 1; }
+    p {
+        text-decoration: underline;
+        text-underline-offset: 6px;
+        &:hover {
+            color: rgb(170, 224, 255);
+            cursor: pointer;
+        }
+    }
+}
+
+.section-6-2 {
+    background-color: $color-white;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px;
+    @include screen-md { flex: 30%; }
+    @include screen-lg-xl { flex: 1.5; }
+    span { color: $color-blue;}
+}
+
+.section-6-3 {
+    background-color: $color-orange;
+    border-radius: 12px;
+    color: $color-white;
+    padding: 30px;
+    @include screen-lg-xl { flex: 1; }
+}
+/*------------ SECTION 6 END -----------*/
+/*------------ SECTION 7 START ---------*/
+#section-7 {
+    @include section-3-7 ( #5ea0b8, 270px, 170px, -70px, -70px, 50px);
+}
+/*------------ SECTION 7 END -----------*/
+/*------------ SECTION 8 START ---------*/
+#section-8 {
+    background-color: #e5e5e5;
+    .container {
+        gap: 20px;
+        @include screen-xsm { flex-direction: column; }
+        @include screen-sm { flex-wrap: wrap; }
+        @include screen-md { flex-wrap: wrap; }
+        h1 {
+            @include screen-xsm { font-size: 2rem; }
+            @include screen-sm { font-size: 2.4rem; }
+            @include screen-md { font-size: 2.7rem; }
+            @include screen-lg-xl { font-size: 3rem; }
+            margin: 0;
+        }
+        p {
+            color: $color-gray;
+            margin: 30px 0;
+            text-align: center;
+            text-transform: uppercase;
+        }
+    }
+    .card-container {
+        @include screen-sm { flex: 40%; }
+        @include screen-md { flex: 40%; }
+        @include screen-lg-xl { flex: 1; }
+    }
+}
+
+.section-8-1, .section-8-2 {
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+    height: 80px;
+    width: 80px;
+}
+
+.section-8-1 { background-color: $color-blue; }
+
+.section-8-2 { background-color: $color-orange; }
+
+.material-symbols-outlined {
+    color: $color-white;
+    transform: scale(1.5);
+}
+/*------------ SECTION 8 END -----------*/
+/*------------ SECTION 9 START ---------*/
+#section-9 {
+    background-color: $color-black;
+    .container {
+        @include screen-xsm-sm { flex-direction: column; }
+    }
+}
+
+.section-9-1 {
+    color: $color-white;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+    justify-content: center;
+    @include screen-xsm-sm { padding: 0 20px 30px 20px; }
+    h1 {
+        @include screen-xsm { font-size: 1.7rem; }
+        @include screen-sm { font-size: 1.8rem; }
+        @include screen-md {
+            font-size: 1.9rem;
+            padding-right: 40px;
+        }
+        @include screen-lg-xl {
+            font-size: 2rem;
+            padding-right: 50px;
+        }
+        margin-top: 0;
+    }
+    p {
+        @include screen-md { padding-right: 40px; }
+        @include screen-lg-xl { padding-right: 50px; }
+        margin-top: 0;
+    }
+    button {
+        margin-top: 30px;
+        &:hover {
+            background-color: $color-orange;
+            color: $color-white;
+        }
+    }
+}
+
+.section-9-2 {
+    background-color: $color-white;
+    border-radius: 20px;
+    flex: 1;
+}
+
+.form-container {
+    @include screen-xsm { margin: 20px; }
+    @include screen-sm { margin: 30px; }
+    @include screen-md { margin: 40px; }
+    @include screen-lg-xl { margin: 50px; }
+    h1 {
+        text-align: center;
+        @include screen-xsm { font-size: 1.7rem; }
+        @include screen-sm { font-size: 1.8rem; }
+        @include screen-md { font-size: 1.9rem; }
+        @include screen-lg-xl { font-size: 2rem; }
+    }
+    form {
+        #form-name {
+            height: 2.5rem;
+            @include form-input;
+        }
+        #form-email {
+            height: 2.5rem;
+            @include form-input;
+        }
+        #form-textarea { @include form-input; }
+        span {
+            color: $color-gray;
+            cursor: pointer;
+        }
+        button {
+            background-color: $color-blue;
+            color: $color-white;
+            margin-top: 16px;
+            width: 100%;
+            &:hover {
+                background-color: $color-orange;
+            }
+        }
+    }
+}
+/*------------ SECTION 9 END -----------*/

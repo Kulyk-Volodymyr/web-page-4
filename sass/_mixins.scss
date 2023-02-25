@@ -1,0 +1,88 @@
+@mixin section-1-5 ($bg-color, $left-1, $left-2, $left-3, $left-4, $left-5, $top-1: initial, $top-2: initial) {
+    background-color: $bg-color;
+    top: $top-1;
+    @include screen-xsm-sm { flex-direction: column; }
+    @include screen-md {
+        flex-direction: row-reverse;
+        height: 640px;
+    }
+    @include screen-lg {
+        flex-direction: row-reverse;
+        height: 720px;
+    }
+    @include screen-xl { height: 800px; }
+    .article-container {
+        margin: auto 0;
+        @include screen-md {
+            padding-right: 50px;
+            top: $top-2;
+        }
+        @include screen-lg {
+            padding-right: 50px;
+            top: $top-2;
+        }
+        @include screen-xl {
+            left: 50%;
+            top: $top-2;
+            width: 540px;
+        }
+    }
+    .image-container {
+        @include screen-md-xl { left: 0; }
+        img {
+            @include screen-xsm { left: $left-1; }
+            @include screen-sm { left: $left-2; }
+            @include screen-md { left: $left-3; }
+            @include screen-lg { left: $left-4; }
+            @include screen-xl { left: $left-5; }
+        }
+    }
+}
+
+@mixin section-3-7 ($bg-color, $right-1, $right-2, $right-3, $right-4, $right-5 ) {
+    background-color: $bg-color;
+    @include screen-xsm-sm { flex-direction: column; }
+    @include screen-md { height: 640px; }
+    @include screen-lg { height: 720px; }
+    @include screen-xl {
+        flex-direction: row-reverse;
+        height: 800px;
+    }
+    .article-container {
+        margin: auto 0;
+        @include screen-md { padding-left: 50px; }
+        @include screen-lg { padding-left: 50px; }
+        @include screen-xl {
+            margin: auto 0;
+            right: 50%;
+            width: 540px;
+        }
+    }
+    .image-container {
+        @include screen-md-xl { right: 0; }
+        img {
+            @include screen-xsm { right: $right-1; }
+            @include screen-sm { right: $right-2; }
+            @include screen-md { right: $right-3; }
+            @include screen-lg { right: $right-4; }
+            @include screen-xl {
+                position: absolute;
+                right: $right-5;
+            }
+        }
+    }
+}
+
+@mixin form-input {
+    background-color: #e5e5e5;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    margin: 4px 0 16px 0;
+    text-indent: 0.5rem;
+    width: 99%;
+    &:focus {
+        border: none;
+        outline: none;
+    }
+}
